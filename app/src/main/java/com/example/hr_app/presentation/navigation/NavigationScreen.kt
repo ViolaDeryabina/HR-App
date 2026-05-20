@@ -11,6 +11,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.hr_app.presentation.screens.Authorization
 import com.example.hr_app.presentation.screens.PostLoginLoading
 import com.example.hr_app.presentation.screens.Registration
+import com.example.hr_app.presentation.screens.VacanciesMain
 import com.example.hr_app.presentation.viewModel.AuthViewModel
 import com.example.hr_app.presentation.viewModel.RegisterViewModel
 
@@ -31,12 +32,18 @@ fun NavigationScreen(modifier: Modifier = Modifier, padding: PaddingValues) {
             )
         }
         composable<PostLoginLoading> {
-            PostLoginLoading(modifier = Modifier.padding(padding))
+            PostLoginLoading(modifier = Modifier.padding(padding), navController = navController)
         }
         composable<Registration> {
             val registerViewModel: RegisterViewModel = hiltViewModel()
             Registration(
                 viewModel = registerViewModel,
+                navController = navController,
+                modifier = Modifier.padding(padding)
+            )
+        }//VacanciesMain
+        composable<VacanciesMain> {
+            VacanciesMain(
                 navController = navController,
                 modifier = Modifier.padding(padding)
             )

@@ -15,3 +15,6 @@ object Registration
 
 @Serializable
 object PostLoginLoading
+
+@Serializable
+object VacanciesMain

@@ -3,6 +3,7 @@ package com.example.hr_app.domain
 import com.example.hr_network_library.data.dataSources.NetworkResult
 import com.example.hr_network_library.data.dto.ProfileDto
 import com.example.hr_network_library.data.dto.RegisterRequest
+import com.example.hr_network_library.domain.entities.Profile
 import com.example.hr_network_library.domain.repository.AuthenticationRepository
 import javax.inject.Inject
 
@@ -11,7 +12,7 @@ import javax.inject.Inject
 // Дата создания 20-05-2026
 
 class RegisterUseCase @Inject constructor(private val authenticationRepository: AuthenticationRepository) {
-    suspend operator fun invoke(registerRequest: RegisterRequest): NetworkResult<ProfileDto>{
+    suspend operator fun invoke(registerRequest: RegisterRequest): NetworkResult<Profile> {
         return authenticationRepository.register(registerRequest)
     }
 }

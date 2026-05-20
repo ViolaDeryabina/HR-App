@@ -7,6 +7,7 @@ import com.example.hr_network_library.data.dataSources.NetworkResult
 import com.example.hr_network_library.data.dto.ApiError
 import com.example.hr_network_library.data.dto.ProfileDto
 import com.example.hr_network_library.data.dto.RegisterRequest
+import com.example.hr_network_library.domain.entities.Profile
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,8 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class RegisterViewModel @Inject constructor(private val registerUseCase: RegisterUseCase) :
     ViewModel() {
-    private val _data = MutableStateFlow<NetworkResult<ProfileDto>?>(null)
-    val data: StateFlow<NetworkResult<ProfileDto>?> = _data.asStateFlow()
+    private val _data = MutableStateFlow<NetworkResult<Profile>?>(null)
+    val data: StateFlow<NetworkResult<Profile>?> = _data.asStateFlow()
 
     private val _error = MutableStateFlow<NetworkResult<ApiError>?>(null)
     val error: StateFlow<NetworkResult<ApiError>?> = _error.asStateFlow()

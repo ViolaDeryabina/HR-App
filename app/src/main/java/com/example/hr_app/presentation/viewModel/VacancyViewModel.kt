@@ -1,0 +1,43 @@
+package com.example.hr_app.presentation.viewModel
+
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.hr_app.domain.GetListVacancyUseCase
+import com.example.hr_network_library.data.dataSources.NetworkResult
+import com.example.hr_network_library.data.dto.ApiError
+import com.example.hr_network_library.data.dto.VacancyDto
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import javax.inject.Inject
+
+@HiltViewModel
+class VacancyViewModel @Inject constructor(private val getListVacancyUseCase: GetListVacancyUseCase) :
+    ViewModel() {
+    private val _data = MutableStateFlow<NetworkResult<VacancyDto>?>(null)
+    val data: StateFlow<NetworkResult<VacancyDto>?> = _data.asStateFlow()
+
+    private val _error = MutableStateFlow<NetworkResult<ApiError>?>(null)
+    val error: StateFlow<NetworkResult<ApiError>?> = _error.asStateFlow()
+
+    fun getVacancy(token: String) {
+        viewModelScope.launch {
+            _data.value = null
+            when (val result = getListVacancyUseCase.invoke(token)) {
+                is NetworkResult.Success -> {
+                    _data.value = NetworkResult.Success(result.data)
+                }
+
+                is NetworkResult.Error -> {
+                    _error.value = NetworkResult.Error(result.status, result.message)
+                }
+
+                is NetworkResult.Exception -> {
+                    _error.value = NetworkResult.Exception(result.message)
+                }
+            }
+        }
+    }
+}
