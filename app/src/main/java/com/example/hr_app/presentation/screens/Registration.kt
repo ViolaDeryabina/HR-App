@@ -39,6 +39,7 @@ import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.hr_app.R
+import com.example.hr_app.domain.SharedPref
 import com.example.hr_app.presentation.navigation.Authorization
 import com.example.hr_app.presentation.navigation.PostLoginLoading
 import com.example.hr_app.presentation.viewModel.RegisterViewModel
@@ -62,7 +63,8 @@ import com.example.hr_uikit.presentation.theme.White
 fun Registration(
     modifier: Modifier = Modifier,
     viewModel: RegisterViewModel,
-    navController: NavController
+    navController: NavController,
+
 ) {
     var firstName by rememberSaveable { mutableStateOf("") }
     var lastName by rememberSaveable { mutableStateOf("") }
@@ -96,7 +98,7 @@ fun Registration(
 
     LaunchedEffect(data) {
         if (data != null) {
-            navController.navigate(PostLoginLoading)
+            navController.navigate(Authorization)
         }
     }
     LaunchedEffect(error) {

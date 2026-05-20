@@ -36,11 +36,13 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import com.example.hr_app.R
+import com.example.hr_app.domain.SharedPref
 import com.example.hr_app.presentation.navigation.Authorization
 import com.example.hr_app.presentation.navigation.PostLoginLoading
 import com.example.hr_app.presentation.navigation.Registration
 import com.example.hr_app.presentation.viewModel.AuthViewModel
 import com.example.hr_network_library.common.logDebug
+import com.example.hr_network_library.data.dataSources.NetworkResult
 import com.example.hr_network_library.data.dto.AuthRequest
 import com.example.hr_uikit.presentation.components.CustomCheckBox
 import com.example.hr_uikit.presentation.components.Input
@@ -59,7 +61,8 @@ import com.example.hr_uikit.presentation.theme.White
 fun Authorization(
     modifier: Modifier = Modifier,
     authViewModel: AuthViewModel,
-    navController: NavController
+    navController: NavController,
+    sharedPref: SharedPref
 ) {
     var login by rememberSaveable { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
@@ -67,7 +70,10 @@ fun Authorization(
 
     val data by authViewModel.data.collectAsStateWithLifecycle()
     LaunchedEffect(data) {
-        if (data != null) {
+        if (data is NetworkResult.Success) {
+            val response = (data as NetworkResult.Success).data
+            val token = response.token
+            sharedPref.saveToken(token)
             navController.navigate(PostLoginLoading)
         }
     }
@@ -179,7 +185,11 @@ fun Authorization(
                         .offset(x = (-10).dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    CustomCheckBox(checked = check, onCheckedChange = { check = !check }, enabled = true)
+                    CustomCheckBox(
+                        checked = check,
+                        onCheckedChange = { check = !check },
+                        enabled = true
+                    )
                     Text(
                         "Remember Me",
                         modifier = Modifier.fillMaxWidth(),

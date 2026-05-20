@@ -33,7 +33,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hr_app.R
+import com.example.hr_app.domain.SharedPref
 import com.example.hr_app.presentation.viewModel.VacancyViewModel
+import com.example.hr_network_library.common.logDebug
 import com.example.hr_uikit.presentation.components.BottomBar
 import com.example.hr_uikit.presentation.components.Input
 import com.example.hr_uikit.presentation.components.PrimaryButton
@@ -46,12 +48,21 @@ import com.example.hr_uikit.presentation.theme.White
 fun VacanciesMain(
     modifier: Modifier = Modifier,
     navController: NavController = rememberNavController(),
-    viewModel: VacancyViewModel
+    viewModel: VacancyViewModel,
+    sharedPref: SharedPref
 ) {
     val scroll = rememberScrollState()
     val data by viewModel.data.collectAsStateWithLifecycle()
-    LaunchedEffect(data) {
+    LaunchedEffect(Unit) {
+        val token = sharedPref.getToken()
+        logDebug("VacanciesMain", "Получение токена", "$token")
+        if(token!=null){
+            viewModel.getVacancy(token)
+        }
 
+    }
+    LaunchedEffect(data) {
+        logDebug("VacanciesMain", "Получение данных", "$data")
     }
     Scaffold(
         topBar = {
