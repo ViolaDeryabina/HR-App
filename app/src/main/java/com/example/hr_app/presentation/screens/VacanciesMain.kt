@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -20,6 +21,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,10 +40,15 @@ import com.example.hr_app.R
 import com.example.hr_app.domain.SharedPref
 import com.example.hr_app.presentation.viewModel.VacancyViewModel
 import com.example.hr_network_library.common.logDebug
+import com.example.hr_network_library.data.dataSources.NetworkResult
+import com.example.hr_network_library.data.dto.VacancyDto
+import com.example.hr_network_library.data.dto.VacancyResponse
 import com.example.hr_uikit.presentation.components.BottomBar
+import com.example.hr_uikit.presentation.components.CardCustom
 import com.example.hr_uikit.presentation.components.Input
 import com.example.hr_uikit.presentation.components.PrimaryButton
 import com.example.hr_uikit.presentation.components.SecondaryButton
+import com.example.hr_uikit.presentation.model.CardCustom
 import com.example.hr_uikit.presentation.theme.CustomTheme
 import com.example.hr_uikit.presentation.theme.Text
 import com.example.hr_uikit.presentation.theme.White
@@ -56,13 +65,17 @@ fun VacanciesMain(
     LaunchedEffect(Unit) {
         val token = sharedPref.getToken()
         logDebug("VacanciesMain", "Получение токена", "$token")
-        if(token!=null){
+        if (token != null) {
             viewModel.getVacancy(token)
         }
-
     }
+    var result by remember { mutableStateOf<VacancyResponse?>(null) }
     LaunchedEffect(data) {
-        logDebug("VacanciesMain", "Получение данных", "$data")
+        if (data is NetworkResult.Success) {
+            result = (data as NetworkResult.Success).data
+
+        }
+        logDebug("VacanciesMain", "Получение данных", "$result")
     }
     Scaffold(
         topBar = {
@@ -195,9 +208,27 @@ fun VacanciesMain(
             }
             Spacer(modifier = Modifier.height(24.dp))
 
+            result.let {
+                it?.items?.forEach { item->
+                    CardCustom(
+                        information = CardCustom(
+                            textTitle = item.title,
+                            category = item.description,
+                            time = "21.05.2026",
+                            status = "Active",
+                            money = item.employee,
+                            people = item.quantity
+                        )
+                    )
+                    Spacer(modifier = Modifier.height(32.dp))
+                }
+            }
+
+
         }
     }
 }
+
 
 @Preview
 @Composable

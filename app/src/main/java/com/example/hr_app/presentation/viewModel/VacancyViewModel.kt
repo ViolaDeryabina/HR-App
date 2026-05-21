@@ -6,6 +6,7 @@ import com.example.hr_app.domain.GetListVacancyUseCase
 import com.example.hr_network_library.data.dataSources.NetworkResult
 import com.example.hr_network_library.data.dto.ApiError
 import com.example.hr_network_library.data.dto.VacancyDto
+import com.example.hr_network_library.data.dto.VacancyResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -16,8 +17,8 @@ import javax.inject.Inject
 @HiltViewModel
 class VacancyViewModel @Inject constructor(private val getListVacancyUseCase: GetListVacancyUseCase) :
     ViewModel() {
-    private val _data = MutableStateFlow<NetworkResult<VacancyDto>?>(null)
-    val data: StateFlow<NetworkResult<VacancyDto>?> = _data.asStateFlow()
+    private val _data = MutableStateFlow<NetworkResult<VacancyResponse>?>(null)
+    val data: StateFlow<NetworkResult<VacancyResponse>?> = _data.asStateFlow()
 
     private val _error = MutableStateFlow<NetworkResult<ApiError>?>(null)
     val error: StateFlow<NetworkResult<ApiError>?> = _error.asStateFlow()
