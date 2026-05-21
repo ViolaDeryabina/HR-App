@@ -38,6 +38,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.hr_app.R
 import com.example.hr_app.domain.SharedPref
 import com.example.hr_app.presentation.components.Headers
+import com.example.hr_app.presentation.navigation.CreateVacancyStep1
 import com.example.hr_app.presentation.navigation.VacancyDetails
 import com.example.hr_app.presentation.viewModel.VacancyViewModel
 import com.example.hr_network_library.common.logDebug
@@ -116,7 +117,10 @@ fun VacanciesMain(
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 PrimaryButton(
-                    onClick = {}, text = "+ Create Vacancy", enabled = true,
+                    onClick = {
+                        logDebug("VacanciesMain", "Переход", "Переход на форму создания вакансии")
+                        navController.navigate(CreateVacancyStep1)
+                    }, text = "+ Create Vacancy", enabled = true,
                     modifier = Modifier.weight(1f)
                 )
             }
@@ -205,7 +209,7 @@ fun VacanciesMain(
                             people = item.quantity
                         ),
                         modifier = Modifier.clickable(onClick = {
-                           sharedPref.saveVacancyId(item.id ?: "")
+                            sharedPref.saveVacancyId(item.id ?: "")
                             navController.navigate(VacancyDetails)
                         })
                     )

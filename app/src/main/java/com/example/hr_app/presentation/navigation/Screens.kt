@@ -1,5 +1,6 @@
 package com.example.hr_app.presentation.navigation
 
+import androidx.compose.ui.Modifier
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.Serializer
 
@@ -21,3 +22,10 @@ object VacanciesMain
 
 @Serializable
 object VacancyDetails
+
+@Serializable
+object CreateVacancyStep1
+@Serializable
+object CreateVacancyStep2
+@Serializable
+object CreateVacancyStep3

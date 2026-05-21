@@ -45,6 +45,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.hr_app.R
 import com.example.hr_app.data.VacancyDetailsMiniCard
 import com.example.hr_app.domain.SharedPref
@@ -59,6 +61,7 @@ import com.example.hr_app.presentation.helpers.Spacer4H
 import com.example.hr_app.presentation.helpers.Spacer8H
 import com.example.hr_app.presentation.helpers.Spacer8W
 import com.example.hr_app.presentation.viewModel.GetInfoById
+import com.example.hr_network_library.common.logDebug
 import com.example.hr_network_library.data.dataSources.NetworkResult
 import com.example.hr_network_library.data.dto.VacancyDto
 import com.example.hr_uikit.presentation.components.BottomBar
@@ -75,11 +78,11 @@ import com.example.hr_uikit.presentation.theme.White
 fun VacancyDetails(
     modifier: Modifier = Modifier,
     viewModel: GetInfoById = hiltViewModel(),
-    sharedPref: SharedPref = SharedPref(LocalContext.current)
+    sharedPref: SharedPref = SharedPref(LocalContext.current),
+    navController: NavController = rememberNavController()
 ) {
     val scroll = rememberScrollState()
     val data by viewModel.data.collectAsStateWithLifecycle()
-    val loading by viewModel.loading.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
         val id = sharedPref.getVacancyId()
@@ -103,7 +106,11 @@ fun VacancyDetails(
                 iconFirst = R.drawable.left,
                 tintFirst = Color(0xFF64748B),
                 iconSecond = R.drawable.three_point,
-                padding = PaddingValues(20.dp)
+                padding = PaddingValues(20.dp),
+                onClickFirst = {
+                    logDebug("VacancyDetails","Переход","Назад по стэку")
+                    navController.popBackStack()
+                }
             )
         },
         bottomBar = {

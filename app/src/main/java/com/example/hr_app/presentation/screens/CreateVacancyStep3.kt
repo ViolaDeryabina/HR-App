@@ -5,6 +5,7 @@ package com.example.hr_app.presentation.screens
 // Дата создания 21-05-2026
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -34,10 +35,14 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.hr_app.R
+import com.example.hr_app.data.CreateVacancyStep
 import com.example.hr_app.presentation.components.Headers
 import com.example.hr_app.presentation.helpers.Spacer24H
 import com.example.hr_app.presentation.helpers.Spacer8H
+import com.example.hr_app.presentation.navigation.VacanciesMain
+import com.example.hr_network_library.common.logDebug
 import com.example.hr_uikit.presentation.components.Input
 import com.example.hr_uikit.presentation.components.Pagination
 import com.example.hr_uikit.presentation.components.Select
@@ -48,7 +53,10 @@ import com.example.hr_uikit.presentation.theme.Text
 import com.example.hr_uikit.presentation.theme.White
 
 @Composable
-fun CreateVacancyStep3(modifier: Modifier = Modifier) {
+fun CreateVacancyStep3(
+    modifier: Modifier = Modifier,
+    navController: NavController
+) {
     var hr by remember { mutableStateOf("") }
     var phone by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
@@ -94,6 +102,14 @@ fun CreateVacancyStep3(modifier: Modifier = Modifier) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
+                        .clickable(onClick = {
+                            logDebug(
+                                "CreateVacancyStep3",
+                                "Переход",
+                                "Нв экрана просмотра вакансий"
+                            )
+                            navController.navigate(VacanciesMain)
+                        })
                         .background(Color(0xFFEFF6FF), RoundedCornerShape(12.dp))
                         .padding(vertical = 8.dp, horizontal = 40.dp)
 
@@ -140,14 +156,14 @@ fun CreateVacancyStep3(modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.height(12.dp))
             Pagination(currentPageIndex = 3, progress = true)
             val list = listOf(
-                CreateVacancyStep1(
+                CreateVacancyStep(
                     title = "HR Manager",
                     value = hr,
                     main = false,
                     placeholder = "Sarah Jenkins",
                     select = true
                 ),
-                CreateVacancyStep1(
+                CreateVacancyStep(
                     title = "Phone Number",
                     value = phone,
                     main = false,
@@ -155,7 +171,7 @@ fun CreateVacancyStep3(modifier: Modifier = Modifier) {
                     iconFirst = R.drawable.phone,
                     placeholder = "+1 (415) 888-2930"
                 ),
-                CreateVacancyStep1(
+                CreateVacancyStep(
                     title = "Email Address",
                     value = email,
                     main = false,
@@ -163,7 +179,7 @@ fun CreateVacancyStep3(modifier: Modifier = Modifier) {
                     iconFirst = R.drawable.email,
                     placeholder = "s.jenkins@talentengine.corp"
                 ),
-                CreateVacancyStep1(
+                CreateVacancyStep(
                     title = "Position ",
                     value = person,
                     main = false,
@@ -272,7 +288,7 @@ fun CreateVacancyStep3(modifier: Modifier = Modifier) {
                     imageVector = ImageVector.vectorResource(R.drawable.task),
                     contentDescription = "",
                     tint = Color(0xFF737686),
-                    modifier = Modifier.offset(x=(25).dp, y =(25).dp)
+                    modifier = Modifier.offset(x = (25).dp, y = (25).dp)
                 )
             }
         }
@@ -283,6 +299,6 @@ fun CreateVacancyStep3(modifier: Modifier = Modifier) {
 @Composable
 private fun CreateVacancyStep3Prev() {
     CustomTheme {
-        CreateVacancyStep3()
+        //CreateVacancyStep3()
     }
 }

@@ -1,6 +1,5 @@
 package com.example.hr_app.presentation.navigation
 
-import android.content.Context
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -12,15 +11,19 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.hr_app.domain.SharedPref
 import com.example.hr_app.presentation.screens.Authorization
+import com.example.hr_app.presentation.screens.CreateVacancyStep1
+import com.example.hr_app.presentation.screens.CreateVacancyStep2
+import com.example.hr_app.presentation.screens.CreateVacancyStep3
 import com.example.hr_app.presentation.screens.PostLoginLoading
 import com.example.hr_app.presentation.screens.Registration
 import com.example.hr_app.presentation.screens.VacanciesMain
 import com.example.hr_app.presentation.screens.VacancyDetails
 import com.example.hr_app.presentation.viewModel.AuthViewModel
+import com.example.hr_app.presentation.viewModel.GetDepartmentsViewModel
 import com.example.hr_app.presentation.viewModel.GetInfoById
+import com.example.hr_app.presentation.viewModel.GetPositionsViewModel
 import com.example.hr_app.presentation.viewModel.RegisterViewModel
 import com.example.hr_app.presentation.viewModel.VacancyViewModel
-import java.util.Locale
 
 // Назначение: Навигация между экранами
 // Автор: Дерябина В.Н.
@@ -65,10 +68,35 @@ fun NavigationScreen(modifier: Modifier = Modifier, padding: PaddingValues) {
         composable<VacancyDetails> {
             val viewModel: GetInfoById = hiltViewModel()
             VacancyDetails(
-                //navController = navController,
+                navController = navController,
                 modifier = Modifier.padding(padding),
                 viewModel = viewModel,
                 sharedPref = SharedPref(context)
+            )
+        }//CreateVacancyStep1
+        composable<CreateVacancyStep1> {
+            val viewModelD: GetDepartmentsViewModel = hiltViewModel()
+            val viewModelP: GetPositionsViewModel = hiltViewModel()
+            CreateVacancyStep1(
+                navController = navController,
+                modifier = Modifier.padding(padding),
+                sharedPref = SharedPref(context),
+                viewModelDepartments = viewModelD,
+                viewModelPositions = viewModelP
+            )
+        }
+        composable<CreateVacancyStep3> {
+            CreateVacancyStep3(
+                navController = navController,
+                modifier = Modifier.padding(padding),
+                //sharedPref = SharedPref(context)
+            )
+        }
+        composable<CreateVacancyStep2> {
+            CreateVacancyStep2(
+                navController = navController,
+                modifier = Modifier.padding(padding),
+                //sharedPref = SharedPref(context)
             )
         }
     }

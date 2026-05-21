@@ -2,6 +2,7 @@ package com.example.hr_app.presentation.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -29,10 +30,15 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.hr_app.R
+import com.example.hr_app.data.CreateVacancyStep
 import com.example.hr_app.presentation.components.Headers
 import com.example.hr_app.presentation.helpers.Spacer20H
 import com.example.hr_app.presentation.helpers.Spacer8H
+import com.example.hr_app.presentation.navigation.CreateVacancyStep3
+import com.example.hr_network_library.common.logDebug
 import com.example.hr_uikit.presentation.components.Input
 import com.example.hr_uikit.presentation.components.Pagination
 import com.example.hr_uikit.presentation.theme.CustomTheme
@@ -45,7 +51,10 @@ import com.example.hr_uikit.presentation.theme.White
 // Автор: Дерябина В.Н.
 // Дата создания 21-05-2026
 @Composable
-fun CreateVacancyStep2(modifier: Modifier = Modifier) {
+fun CreateVacancyStep2(
+    modifier: Modifier = Modifier,
+    navController: NavController = rememberNavController()
+) {
     var description by remember { mutableStateOf("") }
     var terms by remember { mutableStateOf("") }
     var requirements by remember { mutableStateOf("") }
@@ -93,6 +102,14 @@ fun CreateVacancyStep2(modifier: Modifier = Modifier) {
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
+                        .clickable(onClick = {
+                            logDebug(
+                                "CreateVacancyStep2",
+                                "Переход",
+                                "К следующему шагу создания вакансии"
+                            )
+                            navController.navigate(CreateVacancyStep3)
+                        })
                         .background(Color(0xFFEFF6FF), RoundedCornerShape(12.dp))
                         .padding(vertical = 8.dp, horizontal = 40.dp)
 
@@ -139,31 +156,31 @@ fun CreateVacancyStep2(modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.height(12.dp))
             Pagination(currentPageIndex = 0, progress = true)
             val list = listOf(
-                CreateVacancyStep1(
+                CreateVacancyStep(
                     title = "Description & Responsibilities",
                     value = description,
                     main = true,
                     placeholder = "Detail the day-to-day responsibilities and overall mission..."
                 ),
-                CreateVacancyStep1(
+                CreateVacancyStep(
                     title = "Terms of Employment",
                     value = terms,
                     main = false,
                     placeholder = "Working hours, location, benefits..."
                 ),
-                CreateVacancyStep1(
+                CreateVacancyStep(
                     title = "Requirements",
                     value = requirements,
                     main = false,
                     placeholder = "List specific skills, experience, or certifications needed..."
                 ),
-                CreateVacancyStep1(
+                CreateVacancyStep(
                     title = "Technical Questions",
                     value = technical,
                     main = false,
                     placeholder = "Specific questions to filter expertise..."
                 ),
-                CreateVacancyStep1(
+                CreateVacancyStep(
                     title = "Test Task",
                     value = testTask,
                     main = false,
@@ -206,7 +223,7 @@ fun CreateVacancyStep2(modifier: Modifier = Modifier) {
             }
             Text(
                 text = "Support Documents",
-                color =Text,
+                color = Text,
                 style = CustomTheme.typography.Subheader18px
             )
 
