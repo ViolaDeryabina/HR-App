@@ -18,3 +18,6 @@ object PostLoginLoading
 
 @Serializable
 object VacanciesMain
+
+@Serializable
+object VacancyDetails

@@ -3,6 +3,7 @@ package com.example.hr_app.presentation.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,7 +13,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -30,20 +30,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hr_app.R
 import com.example.hr_app.domain.SharedPref
 import com.example.hr_app.presentation.components.Headers
+import com.example.hr_app.presentation.navigation.VacancyDetails
 import com.example.hr_app.presentation.viewModel.VacancyViewModel
 import com.example.hr_network_library.common.logDebug
 import com.example.hr_network_library.data.dataSources.NetworkResult
-import com.example.hr_network_library.data.dto.VacancyDto
 import com.example.hr_network_library.data.dto.VacancyResponse
 import com.example.hr_uikit.presentation.components.BottomBar
 import com.example.hr_uikit.presentation.components.CardCustom
@@ -52,7 +50,6 @@ import com.example.hr_uikit.presentation.components.PrimaryButton
 import com.example.hr_uikit.presentation.components.SecondaryButton
 import com.example.hr_uikit.presentation.model.CardCustom
 import com.example.hr_uikit.presentation.theme.CustomTheme
-import com.example.hr_uikit.presentation.theme.Text
 import com.example.hr_uikit.presentation.theme.White
 
 // Назначение: Экрана для просмотра всех вакансия
@@ -197,7 +194,7 @@ fun VacanciesMain(
             Spacer(modifier = Modifier.height(24.dp))
 
             result.let {
-                it?.items?.forEach { item->
+                it?.items?.forEach { item ->
                     CardCustom(
                         information = CardCustom(
                             textTitle = item.title,
@@ -206,7 +203,29 @@ fun VacanciesMain(
                             status = "Active",
                             money = item.employee,
                             people = item.quantity
-                        )
+                        ),
+                        modifier = Modifier.clickable(onClick = {
+                            //sharedPref.saveVacancyId(item.id)
+                        })
+                    )
+                    Spacer(modifier = Modifier.height(32.dp))
+                }
+            }
+            result.let {
+                it?.items?.forEachIndexed { index, item ->
+                    CardCustom(
+                        information = CardCustom(
+                            textTitle = item.title,
+                            category = item.description,
+                            time = "21.05.2026",
+                            status = "Active",
+                            money = item.employee,
+                            people = item.quantity
+                        ),
+                        modifier = Modifier.clickable(onClick = {
+                           sharedPref.saveVacancyId(item.id ?: "")
+                            navController.navigate(VacancyDetails)
+                        })
                     )
                     Spacer(modifier = Modifier.height(32.dp))
                 }

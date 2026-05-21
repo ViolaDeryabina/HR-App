@@ -11,6 +11,9 @@ import androidx.compose.ui.unit.dp
 fun Spacer8H() = Spacer(modifier = Modifier.height(8.dp))
 
 @Composable
+fun Spacer12H() = Spacer(modifier = Modifier.height(12.dp))
+
+@Composable
 fun Spacer16H() = Spacer(modifier = Modifier.height(16.dp))
 @Composable
 fun Spacer20H() = Spacer(modifier = Modifier.height(20.dp))

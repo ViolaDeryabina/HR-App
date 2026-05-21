@@ -15,7 +15,9 @@ import com.example.hr_app.presentation.screens.Authorization
 import com.example.hr_app.presentation.screens.PostLoginLoading
 import com.example.hr_app.presentation.screens.Registration
 import com.example.hr_app.presentation.screens.VacanciesMain
+import com.example.hr_app.presentation.screens.VacancyDetails
 import com.example.hr_app.presentation.viewModel.AuthViewModel
+import com.example.hr_app.presentation.viewModel.GetInfoById
 import com.example.hr_app.presentation.viewModel.RegisterViewModel
 import com.example.hr_app.presentation.viewModel.VacancyViewModel
 import java.util.Locale
@@ -55,6 +57,15 @@ fun NavigationScreen(modifier: Modifier = Modifier, padding: PaddingValues) {
             val viewModel: VacancyViewModel = hiltViewModel()
             VacanciesMain(
                 navController = navController,
+                modifier = Modifier.padding(padding),
+                viewModel = viewModel,
+                sharedPref = SharedPref(context)
+            )
+        }//VacancyDetails
+        composable<VacancyDetails> {
+            val viewModel: GetInfoById = hiltViewModel()
+            VacancyDetails(
+                //navController = navController,
                 modifier = Modifier.padding(padding),
                 viewModel = viewModel,
                 sharedPref = SharedPref(context)
