@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -38,6 +39,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hr_app.R
 import com.example.hr_app.domain.SharedPref
+import com.example.hr_app.presentation.components.Headers
 import com.example.hr_app.presentation.viewModel.VacancyViewModel
 import com.example.hr_network_library.common.logDebug
 import com.example.hr_network_library.data.dataSources.NetworkResult
@@ -53,6 +55,9 @@ import com.example.hr_uikit.presentation.theme.CustomTheme
 import com.example.hr_uikit.presentation.theme.Text
 import com.example.hr_uikit.presentation.theme.White
 
+// Назначение: Экрана для просмотра всех вакансия
+// Автор: Дерябина В.Н.
+// Дата создания 21-05-2026
 @Composable
 fun VacanciesMain(
     modifier: Modifier = Modifier,
@@ -79,28 +84,11 @@ fun VacanciesMain(
     }
     Scaffold(
         topBar = {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(White)
-                    .border(1.dp, Color(0xFFE2E8F0))
-                    .padding(horizontal = 20.dp, vertical = 18.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    "Vacancies",
-                    style = CustomTheme.typography.FieldLabel14pxBold,
-                    fontWeight = FontWeight.ExtraBold,
-                    fontSize = 20.sp,
-                    color = Text
-                )
-                Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.settings),
-                    contentDescription = "",
-                    tint = Color(0xFF64748B)
-                )
-            }
+            Headers(
+                title = "Vacancies",
+                iconSecond = R.drawable.settings,
+                padding = PaddingValues(horizontal = 20.dp, vertical = 18.dp)
+            )
         },
         bottomBar = {
             BottomBar(
