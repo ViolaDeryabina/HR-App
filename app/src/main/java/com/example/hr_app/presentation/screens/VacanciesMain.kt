@@ -194,24 +194,6 @@ fun VacanciesMain(
             Spacer(modifier = Modifier.height(24.dp))
 
             result.let {
-                it?.items?.forEach { item ->
-                    CardCustom(
-                        information = CardCustom(
-                            textTitle = item.title,
-                            category = item.description,
-                            time = "21.05.2026",
-                            status = "Active",
-                            money = item.employee,
-                            people = item.quantity
-                        ),
-                        modifier = Modifier.clickable(onClick = {
-                            //sharedPref.saveVacancyId(item.id)
-                        })
-                    )
-                    Spacer(modifier = Modifier.height(32.dp))
-                }
-            }
-            result.let {
                 it?.items?.forEachIndexed { index, item ->
                     CardCustom(
                         information = CardCustom(
