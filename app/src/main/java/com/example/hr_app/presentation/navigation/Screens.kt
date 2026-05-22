@@ -23,9 +23,9 @@ object VacanciesMain
 @Serializable
 object VacancyDetails
 
+
 @Serializable
-object CreateVacancyStep1
+object CreateVacancy
+
 @Serializable
-object CreateVacancyStep2
-@Serializable
-object CreateVacancyStep3
+object EditVacancy

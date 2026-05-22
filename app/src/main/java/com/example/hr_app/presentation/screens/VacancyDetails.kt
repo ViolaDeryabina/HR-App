@@ -60,6 +60,7 @@ import com.example.hr_app.presentation.helpers.Spacer24H
 import com.example.hr_app.presentation.helpers.Spacer4H
 import com.example.hr_app.presentation.helpers.Spacer8H
 import com.example.hr_app.presentation.helpers.Spacer8W
+import com.example.hr_app.presentation.navigation.EditVacancy
 import com.example.hr_app.presentation.viewModel.GetInfoById
 import com.example.hr_network_library.common.logDebug
 import com.example.hr_network_library.data.dataSources.NetworkResult
@@ -108,7 +109,7 @@ fun VacancyDetails(
                 iconSecond = R.drawable.three_point,
                 padding = PaddingValues(20.dp),
                 onClickFirst = {
-                    logDebug("VacancyDetails","Переход","Назад по стэку")
+                    logDebug("VacancyDetails", "Переход", "Назад по стэку")
                     navController.popBackStack()
                 }
             )
@@ -241,7 +242,7 @@ fun VacancyDetails(
                 Spacer16H()
                 Text(
                     text = it.description,
-                    modifier= Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     color = Color(0xFF434655),
                     style = CustomTheme.typography.BodyMedium16px,
                     fontWeight = FontWeight.Normal
@@ -249,7 +250,7 @@ fun VacancyDetails(
                 Spacer16H()
                 Text(
                     text = it.termsOfEmployments,
-                    modifier= Modifier.fillMaxWidth(),
+                    modifier = Modifier.fillMaxWidth(),
                     color = Color(0xFF434655),
                     style = CustomTheme.typography.BodyMedium16px,
                     fontWeight = FontWeight.Normal
@@ -281,7 +282,9 @@ fun VacancyDetails(
                             bitmap = ImageBitmap.imageResource(R.drawable.photo_temp),
                             contentDescription = "",
                             contentScale = ContentScale.Crop,
-                            modifier = Modifier.fillMaxSize().clip(CircleShape)
+                            modifier = Modifier
+                                .fillMaxSize()
+                                .clip(CircleShape)
                         )
                     }
                     Spacer16W()
@@ -380,7 +383,9 @@ fun VacancyDetails(
                 Spacer24H()
 
                 PrimaryButton(
-                    onClick = {},
+                    onClick = {
+                        navController.navigate(EditVacancy)
+                    },
                     text = "Edit Vacancy",
                     enabled = true,
                     modifier = Modifier.fillMaxWidth()
