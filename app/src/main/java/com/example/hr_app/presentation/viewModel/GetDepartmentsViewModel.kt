@@ -13,6 +13,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+// Назначение: Класс для управления состоянием экрана Создание вакансии
+// Автор: Дерябина В.Н.
+// Дата создания 21-05-2026
 @HiltViewModel
 class GetDepartmentsViewModel @Inject constructor(private val api: GetDepartmentsUseCase): ViewModel() {
     private val _data = MutableStateFlow<NetworkResult<Comment>?>(null)

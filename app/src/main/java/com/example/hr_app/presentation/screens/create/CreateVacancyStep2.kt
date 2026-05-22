@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hr_app.data.CreateVacancyStep
+import com.example.hr_app.data.ResultStep2
 import com.example.hr_app.domain.SharedPref
 import com.example.hr_app.presentation.helpers.Spacer20H
 import com.example.hr_app.presentation.helpers.Spacer8H
@@ -39,13 +40,7 @@ import kotlinx.serialization.Serializable
 // Автор: Дерябина В.Н.
 // Дата создания 21-05-2026
 
-@Serializable
-data class ResultStep2(
-    val description: String,
-    val requirements: String?,
-    val technical: String?,
-    val testTask: String?,
-)
+
 
 @Composable
 fun CreateVacancyStep2(

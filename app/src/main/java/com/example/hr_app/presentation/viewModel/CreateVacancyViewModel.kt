@@ -15,6 +15,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
+// Назначение: Класс для управления состоянием экрана Вакансии Main
+// Автор: Дерябина В.Н.
+// Дата создания 21-05-2026
 @HiltViewModel
 class CreateVacancyViewModel @Inject constructor(private val api: CreateVacancyUseCase) : ViewModel() {
 

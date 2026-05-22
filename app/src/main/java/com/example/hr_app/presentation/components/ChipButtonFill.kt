@@ -1,6 +1,5 @@
-package com.example.hr_app.presentation.screens
+package com.example.hr_app.presentation.components
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.shape.CircleShape
@@ -20,6 +19,9 @@ import com.example.hr_uikit.presentation.theme.CustomTheme
 import com.example.hr_uikit.presentation.theme.Primary
 import com.example.hr_uikit.presentation.theme.White
 
+// Назначение: Компонент для отображения кнопки
+// Автор: Дерябина В.Н.
+// Дата создания 22-05-2026
 @Composable
 fun ChipButtonFill(
     modifier: Modifier = Modifier,
@@ -38,7 +40,6 @@ fun ChipButtonFill(
 
     Button(
         onClick = { onClick() },
-        //modifier = modifier.border(1.dp, colorBorder, CircleShape),
         shape = CircleShape,
         colors = ButtonColors(
             containerColor = colorBack,

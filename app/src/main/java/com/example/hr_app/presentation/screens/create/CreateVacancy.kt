@@ -29,6 +29,9 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hr_app.R
+import com.example.hr_app.data.ResultStep1
+import com.example.hr_app.data.ResultStep2
+import com.example.hr_app.data.ResultStep3
 import com.example.hr_app.domain.SharedPref
 import com.example.hr_app.presentation.components.Headers
 import com.example.hr_app.presentation.navigation.VacanciesMain
@@ -41,6 +44,9 @@ import com.example.hr_uikit.presentation.theme.CustomTheme
 import com.example.hr_uikit.presentation.theme.Primary
 import com.example.hr_uikit.presentation.theme.White
 
+// Назначение: Экран для отображения экранов для добавления вакансий
+// Автор: Дерябина В.Н.
+// Дата создания 22-05-2026
 @Composable
 fun CreateVacancy(
     modifier: Modifier = Modifier,
@@ -192,18 +198,3 @@ fun CreateVacancy(
         }
     }
 }
-
-//@Preview
-//@Composable
-//private fun CreateVacancyPrev() {
-//    CustomTheme {
-//        val context = LocalContext.current
-//        val viewModelD: GetDepartmentsViewModel = hiltViewModel()
-//        val viewModelP: GetPositionsViewModel = hiltViewModel()
-//        CreateVacancy(
-//            sharedPref = SharedPref(context),
-//            viewModelDepartments = viewModelD,
-//            viewModelPositions = viewModelP
-//        )
-//    }
-//}

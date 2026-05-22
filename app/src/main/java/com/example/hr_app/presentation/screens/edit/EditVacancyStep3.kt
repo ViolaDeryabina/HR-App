@@ -37,7 +37,7 @@ import com.example.hr_app.presentation.helpers.Spacer16W
 import com.example.hr_app.presentation.helpers.Spacer24H
 import com.example.hr_app.presentation.helpers.Spacer8H
 import com.example.hr_app.presentation.helpers.Spacer8W
-import com.example.hr_app.presentation.screens.ChipButtonFill
+import com.example.hr_app.presentation.components.ChipButtonFill
 import com.example.hr_uikit.presentation.components.Avatar
 import com.example.hr_uikit.presentation.components.Input
 import com.example.hr_uikit.presentation.components.Pagination

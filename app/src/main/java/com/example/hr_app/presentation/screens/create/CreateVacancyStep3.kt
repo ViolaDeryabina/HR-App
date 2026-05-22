@@ -34,6 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.hr_app.R
 import com.example.hr_app.data.CreateVacancyStep
+import com.example.hr_app.data.ResultStep3
 import com.example.hr_app.domain.SharedPref
 import com.example.hr_app.presentation.helpers.Spacer24H
 import com.example.hr_app.presentation.helpers.Spacer8H
@@ -46,13 +47,7 @@ import com.example.hr_uikit.presentation.theme.Primary
 import com.example.hr_uikit.presentation.theme.Text
 import kotlinx.serialization.Serializable
 
-@Serializable
-data class ResultStep3(
-    val hr: String,
-    val phone: String,
-    val email: String,
-    val person: String
-)
+
 
 @Composable
 fun CreateVacancyStep3(
@@ -65,7 +60,7 @@ fun CreateVacancyStep3(
     var person by remember { mutableStateOf("") }
     val scroll = rememberScrollState()
     LaunchedEffect(hr,phone, email, person) {
-        val currentStep1 =ResultStep3(
+        val currentStep1 = ResultStep3(
             hr,
             phone,
             email,

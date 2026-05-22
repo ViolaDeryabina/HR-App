@@ -6,7 +6,9 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-
+// Назначение: Функии для осздания отступов
+// Автор: Дерябина В.Н.
+// Дата создания 22-05-2026
 @Composable
 fun Spacer4H() = Spacer(modifier = Modifier.height(4.dp))
 @Composable

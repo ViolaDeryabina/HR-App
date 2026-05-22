@@ -25,6 +25,9 @@ import com.example.hr_uikit.presentation.theme.Secondary
 import com.example.hr_uikit.presentation.theme.Text
 import com.example.hr_uikit.presentation.theme.White
 
+// Назначение: Компонент для отображения top bar
+// Автор: Дерябина В.Н.
+// Дата создания 22-05-2026
 @Composable
 fun Headers(
     modifier: Modifier = Modifier,

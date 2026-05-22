@@ -38,7 +38,7 @@ import com.example.hr_app.domain.SharedPref
 import com.example.hr_app.presentation.helpers.Spacer16H
 import com.example.hr_app.presentation.helpers.Spacer24H
 import com.example.hr_app.presentation.helpers.Spacer8H
-import com.example.hr_app.presentation.screens.ChipButtonFill
+import com.example.hr_app.presentation.components.ChipButtonFill
 import com.example.hr_app.presentation.viewModel.GetInfoById
 import com.example.hr_network_library.data.dataSources.NetworkResult
 import com.example.hr_network_library.data.dto.VacancyDto

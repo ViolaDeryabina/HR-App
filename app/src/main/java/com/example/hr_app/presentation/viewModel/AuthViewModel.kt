@@ -13,7 +13,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-// Назначение: 
+// Назначение: Класс для управления состоянием экрана авторизации
 // Автор: Дерябина В.Н.
 // Дата создания 21-05-2026
 @HiltViewModel

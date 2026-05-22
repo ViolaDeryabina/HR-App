@@ -40,6 +40,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hr_app.R
 import com.example.hr_app.data.CreateVacancyStep
+import com.example.hr_app.data.ResultStep1
 import com.example.hr_app.domain.SharedPref
 import com.example.hr_app.presentation.components.CustomSwitch
 import com.example.hr_app.presentation.helpers.Spacer24H
@@ -59,24 +60,6 @@ import com.example.hr_uikit.presentation.theme.Error
 import com.example.hr_uikit.presentation.theme.Primary
 import com.example.hr_uikit.presentation.theme.Text
 import com.example.hr_uikit.presentation.theme.White
-import kotlinx.serialization.Serializable
-
-data class CreateVacancy(
-    val title: String,
-    val id: Int
-)
-
-@Serializable
-data class ResultStep1(
-    val title: String,
-    val salaryRange: String,
-    val quantity: Int,
-    val depart: String,
-    val positions: String,
-    val experience: String,
-    val city: String,
-    val public: Boolean
-)
 
 @Composable
 fun CreateVacancyStep1(

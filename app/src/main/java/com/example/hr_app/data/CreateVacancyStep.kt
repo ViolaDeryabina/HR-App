@@ -1,5 +1,8 @@
 package com.example.hr_app.data
 
+// Назначение: Модель для создания вакансии
+// Автор: Дерябина В.Н.
+// Дата создания 22-05-2026
 data class CreateVacancyStep(
     val title: String,
     var value: String,

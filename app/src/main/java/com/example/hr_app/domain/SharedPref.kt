@@ -3,10 +3,13 @@ package com.example.hr_app.domain
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
-import com.example.hr_app.presentation.screens.create.ResultStep1
+import com.example.hr_app.data.ResultStep1
 import com.example.hr_app.presentation.screens.create.ResultStep2
 import com.example.hr_app.presentation.screens.create.ResultStep3
 import kotlinx.serialization.json.Json
+// Назначение: Класс для хранения информации в памяти
+// Автор: Дерябина В.Н.
+// Дата создания 20-05-2026
 
 class SharedPref(context: Context) {
 
@@ -51,8 +54,8 @@ class SharedPref(context: Context) {
     }
 
     fun getResultStep1(): ResultStep1? {
-        val json = sharedPref.getString(KEY_VACANCY_STEP_1, null)?: return null
-        return  Json.decodeFromString<ResultStep1>(json)
+        val json = sharedPref.getString(KEY_VACANCY_STEP_1, null) ?: return null
+        return Json.decodeFromString<ResultStep1>(json)
     }
 
     fun saveResultStep2(id: ResultStep2) {
@@ -61,8 +64,8 @@ class SharedPref(context: Context) {
     }
 
     fun getResultStep2(): ResultStep2? {
-        val json = sharedPref.getString(KEY_VACANCY_STEP_2, null)?: return null
-        return  Json.decodeFromString<ResultStep2>(json)
+        val json = sharedPref.getString(KEY_VACANCY_STEP_2, null) ?: return null
+        return Json.decodeFromString<ResultStep2>(json)
     }
 
     fun saveResultStep3(id: ResultStep3) {
@@ -71,8 +74,8 @@ class SharedPref(context: Context) {
     }
 
     fun getResultStep3(): ResultStep3? {
-        val json = sharedPref.getString(KEY_VACANCY_STEP_3, null)?: return null
-        return  Json.decodeFromString<ResultStep3>(json)
+        val json = sharedPref.getString(KEY_VACANCY_STEP_3, null) ?: return null
+        return Json.decodeFromString<ResultStep3>(json)
     }
 
 }

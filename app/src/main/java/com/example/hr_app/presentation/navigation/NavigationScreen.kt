@@ -74,7 +74,7 @@ fun NavigationScreen(modifier: Modifier = Modifier, padding: PaddingValues) {
                 sharedPref = SharedPref(context)
             )
         }
-        composable<com.example.hr_app.presentation.navigation.CreateVacancy> {
+        composable<CreateVacancy> {
             val viewModelD: GetDepartmentsViewModel = hiltViewModel()
             val viewModelP: GetPositionsViewModel = hiltViewModel()
             val viewModel: CreateVacancyViewModel = hiltViewModel()

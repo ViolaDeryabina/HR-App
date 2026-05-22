@@ -17,7 +17,9 @@ import com.example.hr_uikit.presentation.theme.Primary
 import com.example.hr_uikit.presentation.theme.Secondary
 import com.example.hr_uikit.presentation.theme.Text
 import com.example.hr_uikit.presentation.theme.White
-
+// Назначение: Компонент для отображения карточки
+// Автор: Дерябина В.Н.
+// Дата создания 22-05-2026
 @Composable
 fun CardMini(modifier: Modifier = Modifier, title: String, desc: String) {
     Column(modifier = modifier

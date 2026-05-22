@@ -292,22 +292,8 @@ fun EditVacancyStep1(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Button(
-                    onClick = {},
-                    colors = ButtonColors(
-                        containerColor = White,
-                        contentColor = Text,
-                        disabledContainerColor = White,
-                        disabledContentColor = Text
-                    ),
-                    modifier = Modifier
-                        .weight(1f)
-                        .border(1.dp, Color(0xFFC3C6D7), RoundedCornerShape(8.dp))
-                ) {
-
-                }
-                Spacer8W()
                 Input(
+                    modifier= Modifier.fillMaxWidth(),
                     value = quantity,
                     onValueChange = { quantity = it },
                     placeholder = {
@@ -320,18 +306,6 @@ fun EditVacancyStep1(
                         )
                     },
                 )
-                Spacer8W()
-                Button(
-                    onClick = {}, colors = ButtonColors(
-                        containerColor = White,
-                        contentColor = Text,
-                        disabledContainerColor = White,
-                        disabledContentColor = Text
-                    ), modifier = Modifier
-                        .weight(1f)
-                        .border(1.dp, Color(0xFFC3C6D7))
-                ) {
-                }
             }
             Text(
                 text = "SExperience Level",

@@ -17,7 +17,9 @@ import androidx.compose.ui.unit.sp
 import com.example.hr_uikit.presentation.theme.CustomTheme
 import com.example.hr_uikit.presentation.theme.Primary
 import com.example.hr_uikit.presentation.theme.White
-
+// Назначение: Компонент для отображения кнопки
+// Автор: Дерябина В.Н.
+// Дата создания 22-05-2026
 @Composable
 fun ChipButton(
     modifier: Modifier = Modifier,

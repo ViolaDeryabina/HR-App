@@ -12,7 +12,9 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-
+// Назначение: Класс для управления состоянием экрана Создание вакансии
+// Автор: Дерябина В.Н.
+// Дата создания 21-05-2026
 @HiltViewModel
 class GetPositionsViewModel @Inject constructor(private val api: GetPositionsUseCase) :
     ViewModel() {
