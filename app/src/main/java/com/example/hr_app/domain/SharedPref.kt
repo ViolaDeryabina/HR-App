@@ -4,9 +4,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 import com.example.hr_app.data.ResultStep1
-import com.example.hr_app.presentation.screens.create.ResultStep2
-import com.example.hr_app.presentation.screens.create.ResultStep3
+import com.example.hr_app.data.ResultStep2
+import com.example.hr_app.data.ResultStep3
 import kotlinx.serialization.json.Json
+
 // Назначение: Класс для хранения информации в памяти
 // Автор: Дерябина В.Н.
 // Дата создания 20-05-2026
