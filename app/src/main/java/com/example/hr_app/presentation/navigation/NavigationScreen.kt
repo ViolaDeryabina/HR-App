@@ -1,6 +1,5 @@
 package com.example.hr_app.presentation.navigation
 
-import android.content.Context
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -15,10 +14,16 @@ import com.example.hr_app.presentation.screens.Authorization
 import com.example.hr_app.presentation.screens.PostLoginLoading
 import com.example.hr_app.presentation.screens.Registration
 import com.example.hr_app.presentation.screens.VacanciesMain
+import com.example.hr_app.presentation.screens.VacancyDetails
+import com.example.hr_app.presentation.screens.create.CreateVacancy
+import com.example.hr_app.presentation.screens.edit.EditVacancy
 import com.example.hr_app.presentation.viewModel.AuthViewModel
+import com.example.hr_app.presentation.viewModel.CreateVacancyViewModel
+import com.example.hr_app.presentation.viewModel.GetDepartmentsViewModel
+import com.example.hr_app.presentation.viewModel.GetInfoById
+import com.example.hr_app.presentation.viewModel.GetPositionsViewModel
 import com.example.hr_app.presentation.viewModel.RegisterViewModel
 import com.example.hr_app.presentation.viewModel.VacancyViewModel
-import java.util.Locale
 
 // Назначение: Навигация между экранами
 // Автор: Дерябина В.Н.
@@ -27,14 +32,17 @@ import java.util.Locale
 fun NavigationScreen(modifier: Modifier = Modifier, padding: PaddingValues) {
     val navController = rememberNavController()
     val context = LocalContext.current
-    NavHost(navController = navController, startDestination = Authorization) {
+    val sharedPref = SharedPref(context)
+    val token = sharedPref.getToken()
+    val start = if (token != null) PostLoginLoading else Authorization
+    NavHost(navController = navController, startDestination = start) {
         composable<Authorization> {
             val authViewModel: AuthViewModel = hiltViewModel()
             Authorization(
                 authViewModel = authViewModel,
                 navController = navController,
                 modifier = Modifier.padding(padding),
-                        sharedPref = SharedPref(context)
+                sharedPref = SharedPref(context)
             )
         }
         composable<PostLoginLoading> {
@@ -47,14 +55,42 @@ fun NavigationScreen(modifier: Modifier = Modifier, padding: PaddingValues) {
                 navController = navController,
                 modifier = Modifier.padding(padding)
             )
-        }//VacanciesMain
+        }
         composable<VacanciesMain> {
             val viewModel: VacancyViewModel = hiltViewModel()
             VacanciesMain(
                 navController = navController,
                 modifier = Modifier.padding(padding),
-                viewModel=viewModel,
+                viewModel = viewModel,
                 sharedPref = SharedPref(context)
+            )
+        }
+        composable<VacancyDetails> {
+            val viewModel: GetInfoById = hiltViewModel()
+            VacancyDetails(
+                navController = navController,
+                modifier = Modifier.padding(padding),
+                viewModel = viewModel,
+                sharedPref = SharedPref(context)
+            )
+        }
+        composable<CreateVacancy> {
+            val viewModelD: GetDepartmentsViewModel = hiltViewModel()
+            val viewModelP: GetPositionsViewModel = hiltViewModel()
+            val viewModel: CreateVacancyViewModel = hiltViewModel()
+            CreateVacancy(
+                navController = navController,
+                sharedPref = SharedPref(context),
+                viewModelDepartments = viewModelD,
+                viewModelPositions = viewModelP,
+                viewModel = viewModel
+
+            )
+        }
+        composable<EditVacancy> {
+            EditVacancy(
+                navController = navController,
+                modifier = Modifier.padding(padding),
             )
         }
     }

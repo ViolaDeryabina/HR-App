@@ -15,6 +15,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+// Назначение: Класс для управления состоянием экрана регистрации
+// Автор: Дерябина В.Н.
+// Дата создания 21-05-2026
 @HiltViewModel
 class RegisterViewModel @Inject constructor(private val registerUseCase: RegisterUseCase) :
     ViewModel() {

@@ -3,8 +3,10 @@ package com.example.hr_app.presentation.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,30 +22,40 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.hr_app.R
 import com.example.hr_app.domain.SharedPref
+import com.example.hr_app.presentation.components.Headers
+import com.example.hr_app.presentation.navigation.CreateVacancy
+import com.example.hr_app.presentation.navigation.VacancyDetails
 import com.example.hr_app.presentation.viewModel.VacancyViewModel
 import com.example.hr_network_library.common.logDebug
+import com.example.hr_network_library.data.dataSources.NetworkResult
+import com.example.hr_network_library.data.dto.VacancyResponse
 import com.example.hr_uikit.presentation.components.BottomBar
+import com.example.hr_uikit.presentation.components.CardCustom
 import com.example.hr_uikit.presentation.components.Input
 import com.example.hr_uikit.presentation.components.PrimaryButton
 import com.example.hr_uikit.presentation.components.SecondaryButton
+import com.example.hr_uikit.presentation.model.CardCustom
 import com.example.hr_uikit.presentation.theme.CustomTheme
-import com.example.hr_uikit.presentation.theme.Text
 import com.example.hr_uikit.presentation.theme.White
 
+// Назначение: Экрана для просмотра всех вакансия
+// Автор: Дерябина В.Н.
+// Дата создания 21-05-2026
 @Composable
 fun VacanciesMain(
     modifier: Modifier = Modifier,
@@ -56,38 +68,25 @@ fun VacanciesMain(
     LaunchedEffect(Unit) {
         val token = sharedPref.getToken()
         logDebug("VacanciesMain", "Получение токена", "$token")
-        if(token!=null){
+        if (token != null) {
             viewModel.getVacancy(token)
         }
-
     }
+    var result by remember { mutableStateOf<VacancyResponse?>(null) }
     LaunchedEffect(data) {
-        logDebug("VacanciesMain", "Получение данных", "$data")
+        if (data is NetworkResult.Success) {
+            result = (data as NetworkResult.Success).data
+
+        }
+        logDebug("VacanciesMain", "Получение данных", "$result")
     }
     Scaffold(
         topBar = {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(White)
-                    .border(1.dp, Color(0xFFE2E8F0))
-                    .padding(horizontal = 20.dp, vertical = 18.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    "Vacancies",
-                    style = CustomTheme.typography.FieldLabel14pxBold,
-                    fontWeight = FontWeight.ExtraBold,
-                    fontSize = 20.sp,
-                    color = Text
-                )
-                Icon(
-                    imageVector = ImageVector.vectorResource(R.drawable.settings),
-                    contentDescription = "",
-                    tint = Color(0xFF64748B)
-                )
-            }
+            Headers(
+                title = "Vacancies",
+                iconSecond = R.drawable.settings,
+                padding = PaddingValues(horizontal = 20.dp, vertical = 18.dp)
+            )
         },
         bottomBar = {
             BottomBar(
@@ -118,7 +117,10 @@ fun VacanciesMain(
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 PrimaryButton(
-                    onClick = {}, text = "+ Create Vacancy", enabled = true,
+                    onClick = {
+                        logDebug("VacanciesMain", "Переход", "Переход на форму создания вакансии")
+                        navController.navigate(CreateVacancy)
+                    }, text = "+ Create Vacancy", enabled = true,
                     modifier = Modifier.weight(1f)
                 )
             }
@@ -195,9 +197,29 @@ fun VacanciesMain(
             }
             Spacer(modifier = Modifier.height(24.dp))
 
+            result.let {
+                it?.items?.forEachIndexed { index, item ->
+                    CardCustom(
+                        information = CardCustom(
+                            textTitle = item.title,
+                            category = item.description,
+                            time = "21.05.2026",
+                            status = "Active",
+                            money = item.employee,
+                            people = item.quantity
+                        ),
+                        modifier = Modifier.clickable(onClick = {
+                            sharedPref.saveVacancyId(item.id ?: "")
+                            navController.navigate(VacancyDetails)
+                        })
+                    )
+                    Spacer(modifier = Modifier.height(32.dp))
+                }
+            }
         }
     }
 }
+
 
 @Preview
 @Composable
