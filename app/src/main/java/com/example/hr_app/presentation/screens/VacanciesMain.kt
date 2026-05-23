@@ -39,6 +39,8 @@ import com.example.hr_app.R
 import com.example.hr_app.domain.SharedPref
 import com.example.hr_app.presentation.components.Headers
 import com.example.hr_app.presentation.navigation.CreateVacancy
+import com.example.hr_app.presentation.navigation.PhotoUpdated
+import com.example.hr_app.presentation.navigation.VacanciesMain
 import com.example.hr_app.presentation.navigation.VacancyDetails
 import com.example.hr_app.presentation.viewModel.VacancyViewModel
 import com.example.hr_network_library.common.logDebug
@@ -49,9 +51,11 @@ import com.example.hr_uikit.presentation.components.CardCustom
 import com.example.hr_uikit.presentation.components.Input
 import com.example.hr_uikit.presentation.components.PrimaryButton
 import com.example.hr_uikit.presentation.components.SecondaryButton
+import com.example.hr_uikit.presentation.model.BottomBarItem
 import com.example.hr_uikit.presentation.model.CardCustom
 import com.example.hr_uikit.presentation.theme.CustomTheme
 import com.example.hr_uikit.presentation.theme.White
+import com.example.hr_uikit.R as ui
 
 // Назначение: Экрана для просмотра всех вакансия
 // Автор: Дерябина В.Н.
@@ -93,7 +97,31 @@ fun VacanciesMain(
                 modifier = Modifier
                     .fillMaxWidth()
                     .border(1.dp, Color(0xFFE2E8F0)),
-                selected = 1
+                selected = 1,
+                list = listOf(
+                    BottomBarItem(
+                        icon = ui.drawable.dashboard,
+                        text = "Dashboard",
+                        id = 0,
+                        onClick = {}
+                    ), BottomBarItem(
+                        icon = ui.drawable.vacancies,
+                        text = "Vacancies",
+                        id = 1,
+                        onClick = {
+
+                        }
+                    ), BottomBarItem(
+                        icon = ui.drawable.candidates,
+                        text = "Candidates",
+                        id = 2,
+                        onClick = {
+                            logDebug("VacanciesMain", "Переход", "На экран профиль")
+                            navController.navigate(PhotoUpdated)
+                        }
+
+                    )
+                )
             )
         },
         containerColor = Color(0xffFAF8FF)

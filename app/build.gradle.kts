@@ -44,6 +44,8 @@ android {
 }
 
 dependencies {
+    implementation(libs.androidx.camera.core)
+    implementation(libs.androidx.camera.lifecycle)
     implementation(files("libs/hr-network-debug.aar"))
     implementation(files("libs/uikit-debug.aar"))
     implementation(libs.androidx.navigation.compose)

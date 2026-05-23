@@ -29,3 +29,9 @@ object CreateVacancy
 
 @Serializable
 object EditVacancy
+
+@Serializable
+object PhotoUpdated
+
+@Serializable
+object ApplicantsMain
