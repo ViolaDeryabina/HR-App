@@ -28,6 +28,8 @@ fun Spacer24H() = Spacer(modifier = Modifier.height(24.dp))
 
 // width
 @Composable
+fun Spacer4W() = Spacer(modifier = Modifier.width(4.dp))
+@Composable
 fun Spacer8W() = Spacer(modifier = Modifier.width(8.dp))
 
 @Composable
