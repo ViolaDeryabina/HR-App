@@ -12,6 +12,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.hr_app.domain.SharedPref
 import com.example.hr_app.presentation.screens.ApplicantsMain
 import com.example.hr_app.presentation.screens.Authorization
+import com.example.hr_app.presentation.screens.CandidateCardDetails
+import com.example.hr_app.presentation.screens.HRBoardMain
 import com.example.hr_app.presentation.screens.PhotoUpdated
 import com.example.hr_app.presentation.screens.PostLoginLoading
 import com.example.hr_app.presentation.screens.Registration
@@ -97,11 +99,21 @@ fun NavigationScreen(modifier: Modifier = Modifier, padding: PaddingValues) {
         }
         composable<PhotoUpdated> {
             PhotoUpdated(
-                navController=navController
+                navController = navController
             )
         }
         composable<ApplicantsMain> {
             ApplicantsMain(
+            )
+        }
+        composable<HRBoardMain> {
+            HRBoardMain(
+                navController=navController
+
+            )
+        }
+        composable<CandidateCardDetails> {
+            CandidateCardDetails(
             )
         }
     }

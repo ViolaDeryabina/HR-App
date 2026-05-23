@@ -26,9 +26,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.hr_app.R
 import com.example.hr_app.presentation.components.HeadersWhite
 import com.example.hr_app.presentation.helpers.Spacer12W
+import com.example.hr_app.presentation.navigation.CandidateCardDetails
+import com.example.hr_app.presentation.navigation.PhotoUpdated
+import com.example.hr_app.presentation.navigation.VacanciesMain
 import com.example.hr_network_library.common.logDebug
 import com.example.hr_uikit.presentation.components.BottomBar
 import com.example.hr_uikit.presentation.components.Input
@@ -45,7 +49,10 @@ import com.example.hr_uikit.R as ui
 // Автор: Дерябина В.Н.
 // Дата создания 23-05-2026
 @Composable
-fun HRBoardMain(modifier: Modifier = Modifier) {
+fun HRBoardMain(
+    modifier: Modifier = Modifier,
+    navController: NavController
+) {
     Scaffold(
         topBar = {
             HeadersWhite(
@@ -81,7 +88,10 @@ fun HRBoardMain(modifier: Modifier = Modifier) {
                 contentAlignment = Alignment.TopEnd
             ) {
                 FloatingActionButton(
-                    onClick = {},
+                    onClick = {
+                        logDebug("HRBoardMain", "Переход", "На экран деталей по кандидату")
+                        navController.navigate(CandidateCardDetails)
+                    },
                     containerColor = Primary,
                     contentColor = White,
                     shape = CircleShape,
@@ -112,13 +122,17 @@ fun HRBoardMain(modifier: Modifier = Modifier) {
                             text = "Vacancies",
                             id = 1,
                             onClick = {
-                                logDebug("PhotoUpdated", "Переход", "На экран Вакансия главная")
-                                //navController.navigate(VacanciesMain)
+                                logDebug("HRBoardMain", "Переход", "На экран Вакансия главная")
+                                navController.navigate(VacanciesMain)
                             }
                         ), BottomBarItem(
                             icon = ui.drawable.candidates,
                             text = "Candidates",
-                            id = 2
+                            id = 2,
+                            onClick = {
+                                logDebug("HRBoardMain", "Переход", "На экран просмотра профиля")
+                                navController.navigate(PhotoUpdated)
+                            }
                         )
                     )
                 )
@@ -150,8 +164,10 @@ fun HRBoardMain(modifier: Modifier = Modifier) {
                     )
                 },
                 trailingIcon = {
-                    PrimaryButton(onClick = {}, text = "Done", enabled = true,
-                        modifier = Modifier.padding(end = 12.dp))
+                    PrimaryButton(
+                        onClick = {}, text = "Done", enabled = true,
+                        modifier = Modifier.padding(end = 12.dp)
+                    )
                 }
             )
         }
@@ -162,6 +178,6 @@ fun HRBoardMain(modifier: Modifier = Modifier) {
 @Composable
 private fun HRBoardMainPrev() {
     CustomTheme {
-        HRBoardMain()
+        //HRBoardMain()
     }
 }

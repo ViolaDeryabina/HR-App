@@ -35,3 +35,9 @@ object PhotoUpdated
 
 @Serializable
 object ApplicantsMain
+
+@Serializable
+object HRBoardMain
+
+@Serializable
+object CandidateCardDetails
