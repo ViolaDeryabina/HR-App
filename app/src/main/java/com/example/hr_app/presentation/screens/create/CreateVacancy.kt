@@ -58,9 +58,6 @@ fun CreateVacancy(
 ) {
     var step by remember { mutableIntStateOf(0) }
     var token by remember { mutableStateOf("") }
-    var step1 by remember { mutableStateOf<ResultStep1?>(null) }
-    var step2 by remember { mutableStateOf<ResultStep2?>(null) }
-    var step3 by remember { mutableStateOf<ResultStep3?>(null) }
 
     Scaffold(
         topBar = {
@@ -141,10 +138,7 @@ fun CreateVacancy(
                                     )
                                 )
                                 logDebug("TEST", "", "")
-                                // Безопасный переход на финальный экран без зацикливания
-                                navController.navigate(VacanciesMain) {
-                                    popUpTo(VacanciesMain) { inclusive = true }
-                                }
+                                navController.navigate(VacanciesMain)
                             }
                         })
                         .background(Color(0xFFEFF6FF), RoundedCornerShape(12.dp))

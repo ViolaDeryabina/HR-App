@@ -10,7 +10,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.hr_app.domain.SharedPref
+import com.example.hr_app.presentation.screens.ApplicantsMain
 import com.example.hr_app.presentation.screens.Authorization
+import com.example.hr_app.presentation.screens.PhotoUpdated
 import com.example.hr_app.presentation.screens.PostLoginLoading
 import com.example.hr_app.presentation.screens.Registration
 import com.example.hr_app.presentation.screens.VacanciesMain
@@ -91,6 +93,15 @@ fun NavigationScreen(modifier: Modifier = Modifier, padding: PaddingValues) {
             EditVacancy(
                 navController = navController,
                 modifier = Modifier.padding(padding),
+            )
+        }
+        composable<PhotoUpdated> {
+            PhotoUpdated(
+                navController=navController
+            )
+        }
+        composable<ApplicantsMain> {
+            ApplicantsMain(
             )
         }
     }
