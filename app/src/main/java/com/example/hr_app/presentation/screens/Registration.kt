@@ -159,7 +159,7 @@ fun Registration(
                                 style = CustomTheme.typography.BodySmall14px,
                                 color = Secondary
                             )
-                        }
+                        },
                     )
 
 

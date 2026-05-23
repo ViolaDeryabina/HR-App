@@ -126,7 +126,7 @@ fun ApplicantsMain(modifier: Modifier = Modifier) {
                 onValueChange = {},
                 placeholder = {
                     Text(
-                        text = "Active typing state",
+                        text = "Search by Full Name...",
                         style = CustomTheme.typography.BodyMedium16px,
                         color = Text
                     )
